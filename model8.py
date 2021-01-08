@@ -40,7 +40,7 @@ model.add(Dense(16))
 
 start = 0.03
 stop = 0.001
-nb_epoch = 100
+nb_epoch = 300
 learning_rates = np.linspace(start, stop, nb_epoch)
 
 change_lr = LearningRateScheduler(lambda epoch: float(learning_rates[epoch]))

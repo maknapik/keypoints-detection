@@ -33,10 +33,10 @@ model.add(Dense(16))
 
 sgd = SGD(lr=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['acc'])
-flipgen = FlippedImageDataGenerator()
-hist = model.fit_generator(flipgen.flow(X_train, y_train),
+flipgen = FlippedImageDataGenerator(X_train, y_train)
+hist = model.fit_generator(generator=flipgen,
                            samples_per_epoch=X_train.shape[0],
-                           nb_epoch=5,
+                           nb_epoch=3000,
                            validation_data=(X_val, y_val))
 
 pyplot.plot(hist.history['loss'], linewidth=3, label='train')

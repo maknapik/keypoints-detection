@@ -74,7 +74,7 @@ model.add(Dense(16))
 
 start = 0.03
 stop = 0.001
-nb_epoch = 100
+nb_epoch = 200
 
 learning_rates = np.linspace(start, stop, nb_epoch)
 change_lr = LearningRateScheduler(lambda epoch: float(learning_rates[epoch]))
@@ -82,6 +82,8 @@ sgd = SGD(lr=start, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['acc'])
 flipgen = FlippedImageDataGenerator(X_train, y_train)
 early_stop = EarlyStopping(patience=100)
+
+model.load_weights("./modelX_weights.h5")
 
 hist = model.fit_generator(generator=flipgen,
                            samples_per_epoch=X_train.shape[0],

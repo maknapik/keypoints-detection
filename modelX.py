@@ -69,7 +69,7 @@ model.compile(optimizer='adam', loss='mean_squared_error', metrics=['acc'])
 
 X, y = get_data()
 
-hist = model.fit(X, y, batch_size=12, epochs=5, verbose=1)
+hist = model.fit(X, y, batch_size=12, epochs=300, verbose=1, validation_split=0.2)
 
 pyplot.plot(hist.history['loss'], linewidth=3, label='train')
 pyplot.plot(hist.history['val_loss'], linewidth=3, label='valid')

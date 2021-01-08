@@ -35,16 +35,16 @@ model.add(Dense(16))
 
 start = 0.03
 stop = 0.001
-nb_epoch = 1000
+nb_epoch = 3000
 learning_rates = np.linspace(start, stop, nb_epoch)
 change_lr = LearningRateScheduler(lambda epoch: float(learning_rates[epoch]))
 
 sgd = SGD(lr=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['acc'])
-flipgen = FlippedImageDataGenerator()
-hist = model.fit_generator(flipgen.flow(X_train, y_train),
+flipgen = FlippedImageDataGenerator(X_train, y_train)
+hist = model.fit_generator(generator=flipgen,
                            samples_per_epoch=X_train.shape[0],
-                           nb_epoch=100,
+                           nb_epoch=nb_epoch,
                            validation_data=(X_val, y_val),
                            callbacks=[change_lr])
 

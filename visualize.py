@@ -28,4 +28,4 @@ def show_predicts(model_name):
     pyplot.show()
 
 
-show_predicts("modelXX")
+show_predicts("modelX")
